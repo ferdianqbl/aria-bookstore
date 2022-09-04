@@ -3,4 +3,4 @@
 - Node Js
 - Express Js
 - Express-generator
-- Sequelize ORM
+- Sequelize ORM (npx sequelize-cli -h)
