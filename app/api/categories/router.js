@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { auth } = require("../../middlewares/auth");
-const { getAllCategories } = require("./controller");
+const { getAllCategories, addCategory } = require("./controller");
 
 // router.get("/categories", auth, function (req, res) {
 //   res
@@ -9,5 +9,6 @@ const { getAllCategories } = require("./controller");
 //     .json({ message: "Welcome to Aria Bookstore Categories", data: req.user });
 // });
 router.get("/categories", auth, getAllCategories);
+router.post("/categories", auth, addCategory);
 
 module.exports = router;
