@@ -36,7 +36,42 @@ module.exports = {
         .status(200)
         .json({ message: "User signed in successfully", token: token });
     } catch (error) {
-      console.log(error);
+      next(error);
+    }
+  },
+  register: async (req, res, next) => {
+    try {
+      const { name, email, password, confirmPassword } = req.body;
+
+      if (!password)
+        return res.status(403).json({ message: "Password is required" });
+
+      if (password !== confirmPassword)
+        return res
+          .status(403)
+          .json({ message: "Password and Confirm Password must be the same" });
+
+      if (!name) return res.status(403).json({ message: "Name is required" });
+      if (!email) return res.status(403).json({ message: "Email is required" });
+
+      const isEmailExist = await User.findOne({ where: { email } });
+      if (isEmailExist) return res.status(403).json({ message: "Email exist" });
+
+      const hashedPassword = bcrypt.hashSync(password, 10);
+
+      const newUser = await User.create({
+        name,
+        email,
+        password: hashedPassword,
+        role: "admin",
+      });
+
+      // password doesn't return
+      delete newUser.dataValues.password;
+      return res
+        .status(201)
+        .json({ message: "User created successfully", data: newUser });
+    } catch (error) {
       next(error);
     }
   },
