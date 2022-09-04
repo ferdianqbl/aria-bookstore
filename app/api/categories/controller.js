@@ -37,4 +37,38 @@ module.exports = {
       next(error);
     }
   },
+
+  updateCategoryById: async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const { name } = req.body;
+
+      const isCategoryExist = await Category.findOne({ where: { name } });
+      if (isCategoryExist && isCategoryExist.id !== Number(id))
+        return res.status(400).json({ message: "Category already exist" });
+
+      const category = await Category.update(
+        { name },
+        {
+          where: {
+            id,
+            userId: req.user.id,
+          },
+        }
+      );
+
+      const updatedCategory = await Category.findOne({
+        where: {
+          id,
+          userId: req.user.id,
+        },
+      });
+
+      return res
+        .status(200)
+        .json({ message: "Success", data: updatedCategory });
+    } catch (error) {
+      next(error);
+    }
+  },
 };

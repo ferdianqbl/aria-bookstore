@@ -1,7 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const { auth } = require("../../middlewares/auth");
-const { getAllCategories, addCategory } = require("./controller");
+const {
+  getAllCategories,
+  addCategory,
+  updateCategoryById,
+} = require("./controller");
 
 // router.get("/categories", auth, function (req, res) {
 //   res
@@ -10,5 +14,6 @@ const { getAllCategories, addCategory } = require("./controller");
 // });
 router.get("/categories", auth, getAllCategories);
 router.post("/categories", auth, addCategory);
+router.put("/categories/:id", auth, updateCategoryById);
 
 module.exports = router;
