@@ -71,4 +71,28 @@ module.exports = {
       next(error);
     }
   },
+
+  deleteCategoryById: async (req, res, next) => {
+    try {
+      const { id } = req.params;
+
+      const isCategoryExist = await Category.findOne({ where: { id } });
+
+      if (!isCategoryExist)
+        return res.status(404).json({ message: "Not found" });
+
+      await Category.destroy({
+        where: {
+          id,
+          userId: req.user.id,
+        },
+      });
+
+      return res
+        .status(200)
+        .json({ message: "Success", data: isCategoryExist });
+    } catch (error) {
+      next(error);
+    }
+  },
 };
