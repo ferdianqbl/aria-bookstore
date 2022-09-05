@@ -8,11 +8,6 @@ const {
   deleteCategoryById,
 } = require("./controller");
 
-// router.get("/categories", auth, function (req, res) {
-//   res
-//     .status(200)
-//     .json({ message: "Welcome to Aria Bookstore Categories", data: req.user });
-// });
 router.get("/categories", auth, getAllCategories);
 router.post("/categories", auth, addCategory);
 router.put("/categories/:id", auth, updateCategoryById);

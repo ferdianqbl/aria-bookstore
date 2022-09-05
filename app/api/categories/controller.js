@@ -1,6 +1,6 @@
 const { Category } = require("../../db/models");
 
-console.log(Category);
+// console.log(Category);
 
 module.exports = {
   getAllCategories: async (req, res, next) => {
