@@ -21,5 +21,18 @@
   "devDependencies": {
     "nodemon": "^2.0.19",
     "sequelize-cli": "^6.4.1"
-  }
+  },
+  "description": "- Node Js\r - Express Js\r - Express-generator\r - Sequelize ORM (npx sequelize-cli -h)",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ferdianqbl/aria-bookstore.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ferdianqbl/aria-bookstore/issues"
+  },
+  "homepage": "https://github.com/ferdianqbl/aria-bookstore#readme"
 }

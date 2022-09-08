@@ -1,11 +1,16 @@
 const multer = require("multer");
+const path = require("path");
+const fs = require("fs");
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "public/uploads/");
+const fileStorage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    var dir = "../../public/uploads"; // directory to store images
+
+    cb(null, path.join(__dirname, dir));
   },
-  filename: (req, file, cb) => {
-    cb(null, new Date().toISOString() + "-" + file.originalname);
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(null, uniqueSuffix + "_" + file.originalname);
   },
 });
 
@@ -24,11 +29,13 @@ const fileFilter = (req, file, cb) => {
 };
 
 const upload = multer({
-  storage,
+  storage: fileStorage,
   limits: {
     fileSize: 3 * 1000000, // 3MB
   },
   fileFilter,
-});
+}).single("imageFile");
 
-module.exports = upload;
+// console.log("multer middleware loaded", upload.storage.getDestination());
+
+module.exports = { upload };
