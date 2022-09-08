@@ -43,4 +43,45 @@ module.exports = {
       next(error);
     }
   },
+
+  addBook: async (req, res, next) => {
+    try {
+      const { title, categoryId, author, image, published, price, stock } =
+        req.body;
+
+      if (
+        !title ||
+        !categoryId ||
+        !author ||
+        !image ||
+        !published ||
+        !price ||
+        !stock
+      ) {
+        return res.status(400).json({ message: "Please fill all fields" });
+      }
+
+      const isCategoryExist = await Category.findOne({
+        where: { id: categoryId },
+      });
+
+      if (!isCategoryExist)
+        return res.status(400).json({ message: "Category not found" });
+
+      const newBook = await Book.create({
+        title,
+        userId: req.user.id,
+        categoryId,
+        author,
+        image,
+        published,
+        price,
+        stock,
+      });
+
+      return res.status(201).json({ message: "Success", data: newBook });
+    } catch (error) {
+      next(error);
+    }
+  },
 };
