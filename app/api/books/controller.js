@@ -84,4 +84,32 @@ module.exports = {
       next(error);
     }
   },
+
+  updateBookById: async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const { title, categoryId, author, image, published, price, stock } =
+        req.body;
+
+      const isBookExist = await Book.findOne({ where: { id } });
+
+      if (!isBookExist)
+        return res.status(404).json({ message: "Book not found" });
+
+      const bookUpdated = await isBookExist.update({
+        title,
+        userId: req.user.id,
+        categoryId,
+        author,
+        image,
+        published,
+        price,
+        stock,
+      });
+
+      return res.status(200).json({ message: "Success", data: bookUpdated });
+    } catch (error) {
+      next(error);
+    }
+  },
 };
