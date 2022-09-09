@@ -1,5 +1,7 @@
 const { Op } = require("sequelize");
 const { Book, Category, User } = require("../../db/models");
+const fs = require("fs");
+const path = require("path");
 
 module.exports = {
   getAllBooks: async (req, res, next) => {
@@ -115,10 +117,17 @@ module.exports = {
 
   deleteBook: async (req, res, next) => {
     try {
-      const isBookExist = await Book.findOne({ where: { id: req.params } });
+      const isBookExist = await Book.findOne({
+        where: { id: req.params.id, userId: req.user.id },
+      });
 
       if (!isBookExist)
         return res.status(404).json({ message: "Book not found" });
+
+      // delete file image
+      const filePath = `../../../public${isBookExist.image}`;
+      // console.log(__dirname);
+      fs.unlinkSync(path.join(__dirname, filePath));
 
       await isBookExist.destroy();
 
