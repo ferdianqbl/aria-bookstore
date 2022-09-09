@@ -112,4 +112,19 @@ module.exports = {
       next(error);
     }
   },
+
+  deleteBook: async (req, res, next) => {
+    try {
+      const isBookExist = await Book.findOne({ where: { id: req.params } });
+
+      if (!isBookExist)
+        return res.status(404).json({ message: "Book not found" });
+
+      await isBookExist.destroy();
+
+      return res.status(200).json({ message: "Success" });
+    } catch (error) {
+      next(error);
+    }
+  },
 };
