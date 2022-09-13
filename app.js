@@ -11,6 +11,7 @@ const categoriesRouter = require("./app/api/categories/router");
 const booksRouter = require("./app/api/books/router");
 const uploadsRouter = require("./app/api/uploads/router");
 const checkoutRouter = require("./app/api/checkout/router");
+const transactionsRouter = require("./app/api/transactions/router");
 const URL = "/api/v1";
 
 const app = express();
@@ -36,6 +37,7 @@ app.use(`${URL}`, categoriesRouter);
 app.use(`${URL}`, booksRouter);
 app.use(`${URL}`, uploadsRouter);
 app.use(`${URL}`, checkoutRouter);
+app.use(`${URL}`, transactionsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
