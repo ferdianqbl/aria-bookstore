@@ -6,39 +6,30 @@ const path = require("path");
 module.exports = {
   getAllBooks: async (req, res, next) => {
     try {
-      const { keyword } = req.query;
+      const { keyword, category } = req.query;
 
       // req.user is the user object that we set in the auth middleware
-
-      if (keyword) {
-        const books = await Book.findAll({
-          where: {
-            userId: req.user.id,
-            title: {
-              [Op.like]: `%${keyword}%`,
-            },
-          },
-          include: [
-            { model: Category, attributes: ["id", "name"] },
-            { model: User, attributes: ["id", "name", "email"] },
-          ],
-        });
-        // console.log("books: ", books);
-        if (books.length < 1)
-          return res.status(404).json({ message: "Books not found" });
-
-        return res.status(200).json({ message: "Success", data: books });
+      let conditions = {
+        userId: req.user.id,
       }
+      if (keyword)
+        conditions = { ...conditions, title: { [Op.like]: `%${keyword}%` } }
+
+      if (category)
+        conditions = { ...conditions, categoryId: category }
 
       const books = await Book.findAll({
         where: {
-          userId: req.user.id,
+          ...conditions
         },
         include: [
           { model: Category, attributes: ["id", "name"] },
           { model: User, attributes: ["id", "name", "email"] },
         ],
       });
+
+      if (books.length < 1)
+        return res.status(404).json({ message: "No books found" });
 
       return res.status(200).json({ message: "Success", data: books });
     } catch (error) {
@@ -125,10 +116,11 @@ module.exports = {
         return res.status(404).json({ message: "Book not found" });
 
       // delete file image
-      const filePath = `../../../public${isBookExist.image}`;
-      // console.log(__dirname);
-      fs.unlinkSync(path.join(__dirname, filePath));
-
+      if (isBookExist.image) {
+        const filePath = `../../../public${isBookExist.image}`;
+        // console.log(__dirname);
+        fs.unlinkSync(path.join(__dirname, filePath));
+      }
       await isBookExist.destroy();
 
       return res.status(200).json({ message: "Success" });
