@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "yyhwjwblsfjxgg",
-    "password": "0fd4b1c2e3fa4482d76923cd1c46a0870babd39f66802d4d472f2a558ca8c383",
-    "database": "d86lt9q2oiusch",
-    "host": "ec2-34-231-42-166.compute-1.amazonaws.com",
+    "username": "euwehxsnkdocif",
+    "password": "ce5549da199f8395fbfa2e4d5c1903933ccf5c872ca05233c3b9e253b1e31543",
+    "database": "deiaqjommu8b0f",
+    "host": "ec2-52-207-15-147.compute-1.amazonaws.com",
     "dialect": "postgres",
     "port": 5432,
     "dialectOptions": {
@@ -18,10 +18,10 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "yyhwjwblsfjxgg",
-    "password": "0fd4b1c2e3fa4482d76923cd1c46a0870babd39f66802d4d472f2a558ca8c383",
-    "database": "d86lt9q2oiusch",
-    "host": "ec2-34-231-42-166.compute-1.amazonaws.com",
+    "username": "euwehxsnkdocif",
+    "password": "ce5549da199f8395fbfa2e4d5c1903933ccf5c872ca05233c3b9e253b1e31543",
+    "database": "deiaqjommu8b0f",
+    "host": "ec2-52-207-15-147.compute-1.amazonaws.com",
     "dialect": "postgres",
     "port": 5432,
     "dialectOptions": {
