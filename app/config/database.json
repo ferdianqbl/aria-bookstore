@@ -1,10 +1,14 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "aria_bookstore",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": "yyhwjwblsfjxgg",
+    "password": "0fd4b1c2e3fa4482d76923cd1c46a0870babd39f66802d4d472f2a558ca8c383",
+    "database": "d86lt9q2oiusch",
+    "host": "ec2-34-231-42-166.compute-1.amazonaws.com",
+    "dialect": "postgres",
+    "port": 5432,
+    "dialectOptions": {
+      "ssl": { "rejectUnauthorized": false }
+    }
   },
   "test": {
     "username": "root",
