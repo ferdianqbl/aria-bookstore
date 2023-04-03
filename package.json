@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon ./bin/www",
-    "start": "node ./bin/www"
+    "dev": "nodemon index.js",
+    "start": "node index.js"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
@@ -31,7 +31,10 @@
     "type": "git",
     "url": "git+https://github.com/ferdianqbl/aria-bookstore.git"
   },
-  "keywords": [],
+  "keywords": [
+    "express-js",
+    "vercel"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {
